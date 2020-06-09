@@ -1,24 +1,43 @@
 def select_books_titles_and_years_in_first_series_order_by_year
-  "Write your SQL query here"
+  "select books.title, books.year
+    from books
+    where books.series_id=1
+    GROUP BY books.year"
 end
 
 def select_name_and_motto_of_char_with_longest_motto
-  "Write your SQL query here"
+  "select name, motto
+  from characters
+  ORDER BY motto limit 1"
 end
 
 
 def select_value_and_count_of_most_prolific_species
-  "Write your SQL query here"
+  "select characters.species, count(characters.species)
+  from characters
+  GROUP BY characters.species
+  ORDER BY count(characters.species)"
 end
 
 def select_name_and_series_subgenres_of_authors
-  "Write your SQL query here"
+  "select authors.name, subgenres.name
+  from authors
+  INNER JOIN series
+  ON authors.id = series.author_id
+  INNER JOIN series
+  ON subgenres.id = series.subgenre_id"
 end
 
 def select_series_title_with_most_human_characters
-  "Write your SQL query here"
+  "select series.title
+  from series
+  where species = select species from characters where species = 'human'"
 end
 
 def select_character_names_and_number_of_books_they_are_in
-  "Write your SQL query here"
+  "select characters.name, sum(character_books.book_id)
+  from characters
+  INNER JOIN character_books
+  ON characters.id = character_books.character_id
+  GROUP BY characters.name"
 end
